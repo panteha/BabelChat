@@ -1,0 +1,9 @@
+<% $messages.each do |message| %>
+   <li>
+     <%= message %>
+   </li>
+<% end %>
+<form action="messages/post" method="post">
+<input type="text" name="message" >
+<input type="submit" value="send">
+</form>
