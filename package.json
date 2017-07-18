@@ -1,0 +1,27 @@
+{
+  "name": "babelfish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.1.0",
+    "express": "^4.15.3",
+    "google-translate": "^2.0.5",
+    "mocha": "^3.4.2",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panteha/BabelChat.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/panteha/BabelChat/issues"
+  },
+  "homepage": "https://github.com/panteha/BabelChat#readme"
+}
