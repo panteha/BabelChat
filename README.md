@@ -26,6 +26,15 @@ Engage team after struggling for more than 45mins
  * `npm install --save socket.io`
  * `npm install --save google-translate`
 
+## Database Setup
+ * `brew install mongodb`
+ * `sudo mkdir -p /data/db`
+
+To run:
+  * `sudo mongod`
+
+ * `npm install node-env-file`
+
 To run:
  * `node index.js`
 

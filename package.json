@@ -4,17 +4,25 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.5.0",
     "chai": "^4.1.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "google-translate": "^2.0.5",
-    "mocha": "^3.4.2",
+    "mongod": "^2.0.0",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.3",
+    "node-env-file": "^0.1.8",
+    "promise": "^8.0.1",
     "socket.io": "^2.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "should": "^11.2.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "env NODE_ENV=test mocha",
+    "start": "env NODE_ENV=development node ./app.js"
   },
   "repository": {
     "type": "git",
