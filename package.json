@@ -16,11 +16,13 @@
     "react-dom": "^15.6.1",
     "socket.io": "^2.0.3",
     "webpack": "^3.3.0"
+
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+   "start": "node app.js",
+   "test": "mocha"
+ },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/panteha/BabelChat.git"
