@@ -1,3 +1,7 @@
+var mongoose = require('mongoose');
+var Message = require('./models/message');
+mongoose.connect('mongodb://localhost/babelchat_test');
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -16,6 +20,12 @@ io.on('connection', function(socket){
     translate.translate(msg, 'fa', function(err, translation) {
       console.log('translated message: ' + translation.translatedText);
       io.emit('add message', translation.translatedText);
+      var message = new Message({content : msg});
+      message.save(function(err){
+        if(err) throw err;
+
+        console.log('User saved successfully!');
+      });
     });
   });
 

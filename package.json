@@ -8,6 +8,8 @@
     "express": "^4.15.3",
     "google-translate": "^2.0.5",
     "mocha": "^3.4.2",
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.3",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {},
