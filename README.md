@@ -29,6 +29,7 @@ Engage team after struggling for more than 45mins
  * `npm install webpack --save`
  * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
 
+
 To run:
  * `node index.js`
 
@@ -37,8 +38,10 @@ then visit `http://localhost:3000/`
 ##  Testing
 
  * Install Mocha, Chai:
- * `npm install --save mocha`
- * `npm install --save chai`
+ * `npm install --save-dev mocha`
+ * `npm install --save-dev chai`
+ * `npm install --save-dev enzyme`
+ * `npm install --save-dev sinon`
 
 To run:
  * `./node_modules/mocha/bin/mocha`
