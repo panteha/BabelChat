@@ -25,15 +25,9 @@ Engage team after struggling for more than 45mins
  * `npm install --save express`
  * `npm install --save socket.io`
  * `npm install --save google-translate`
-
-## Database Setup
- * `brew install mongodb`
- * `sudo mkdir -p /data/db`
-
-To run:
-  * `sudo mongod`
-
- * `npm install node-env-file`
+ * `npm install react react-dom --save`
+ * `npm install webpack --save`
+ * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
 
 To run:
  * `node index.js`
@@ -55,61 +49,3 @@ To run:
 [Andrew Clarke](https://github.com/Dino982)
 [Spencer Barton-Fisher](https://github.com/spencerbf)
 [Aaron Rodrigues](https://github.com/AaronRodrigues)
-
-## User Stories
-```
-As a user
-So that I can use Babelchat
-I want to visit a sign up page
-
-As a user
-So that I can have a private chat
-I want to login to Babelchat
-
-As a user
-So that I can exit Babel chat
-I want to be able to logout
-
-As a user
-So that I can use my native language
-I want to select an input language
-
-As a user
-So that I can make a message more expressive
-I want to be able to add an emoji
-
-As a user
-So that I can make a message more expressive
-I want to be able to add more than one emoji
-
-As a user
-So I can add friends
-I want to have an add button
-
-As a user
-So that I can have a friend list
-I want to be able to add one friend
-
-As a user
-So that I can have a friend list
-I want to be able to add multiple friend
-
-
-As a user
-So that I can see my native language
-I want to it displayed on my screen
-
-As a user
-So that people can recognize me
-I want to select a user name
-
-
-As a user
-So that other people can recognize me
-I want to be able to upload a display picture
-
-As a user
-So that I can review my chats
-I want to see my chat history.
-
-```

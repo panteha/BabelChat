@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 var Message = require('./models/message');
 // mongoose.connect('mongodb://localhost/babelchat_test');
@@ -19,7 +20,6 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
-
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
@@ -31,14 +31,12 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translate(msg, 'fa', function(err, translation) {
-      console.log('translated message: ' + translation.translatedText);
-      io.emit('add message', translation.translatedText);
-      var message = new Message({content : msg});
-      message.save(function(err){
-        if(err) throw err;
-
-        console.log('User saved successfully!');
-      });
+      if (translation === undefined) {
+        io.emit('add message', msg);
+      } else {
+        console.log('translated message: ' + translation.translatedText);
+        io.emit('add message', translation.translatedText);
+      }
     });
   });
 
@@ -46,7 +44,7 @@ io.on('connection', function(socket){
     console.log('user disconnected');
   });
 });
-// listens
+
 http.listen(process.env.PORT || 3000, function(){
   console.log('listening on *:3000');
 });
