@@ -14,6 +14,7 @@
     "express": "^4.15.3",
     "google-translate": "^2.0.5",
     "mocha": "^3.4.2",
+    "mongo": "^0.1.0",
     "mongod": "^2.0.0",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.3",
@@ -28,9 +29,9 @@
   },
   "devDependencies": {},
   "scripts": {
-      "test": "env NODE_ENV=test mocha",
-      "start": "env NODE_ENV=development node ./app.js"
-    },
+    "test": "env NODE_ENV=test mocha",
+    "start": "env NODE_ENV=development node ./app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/panteha/BabelChat.git"
