@@ -29,6 +29,8 @@ Engage team after struggling for more than 45mins
  * `npm install webpack --save`
  * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
 
+To set up Google Translate API for Heroku
+ * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
 
 To run:
  * `node index.js`
