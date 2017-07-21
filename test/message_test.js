@@ -45,3 +45,32 @@ describe("Get all messages", function(){
                 done();
             });
         });
+
+// Test will pass if the message is saved
+    describe("Post a new message", function(){
+        it("should create new post", function(done){
+            var MessageMock = sinon.mock(new Message({ message: 'Save new message from mock'}));
+            var message = MessageMock.object;
+            var expectedResult = { status: true };
+            MessageMock.expects('save').yields(null, expectedResult);
+            message.save(function (err, result) {
+                MessageMock.verify();
+                MessageMock.restore();
+                expect(result.status).to.be.true;
+                done();
+            });
+        });
+        // Test will pass if the message is not saved
+        it("should return error, if post not saved", function(done){
+            var MessageMock = sinon.mock(new Message({ message: 'Save new message from mock'}));
+            var message = MessageMock.object;
+            var expectedResult = { status: false };
+            MessageMock.expects('save').yields(expectedResult, null);
+            message.save(function (err, result) {
+                MessageMock.verify();
+                MessageMock.restore();
+                expect(err.status).to.not.be.true;
+                done();
+            });
+        });
+    });
