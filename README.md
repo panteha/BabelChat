@@ -42,6 +42,8 @@ then visit `http://localhost:3000/`
  * `npm install --save-dev chai`
  * `npm install --save-dev enzyme`
  * `npm install --save-dev sinon`
+ * `npm install --save-dev react-test-renderer`
+ * `npm install --save-dev jsdom jsdom-global`
 
 To run:
  * `./node_modules/mocha/bin/mocha`
