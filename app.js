@@ -19,7 +19,6 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
-
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
