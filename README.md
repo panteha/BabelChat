@@ -28,6 +28,8 @@ Engage team after struggling for more than 45mins
  * `npm install react react-dom --save`
  * `npm install webpack --save`
  * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
+ * `npm install sinon --save'
+ * `npm install sinon-mongoose --save'
 
 To run:
  * `node index.js`
