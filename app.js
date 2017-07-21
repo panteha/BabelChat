@@ -23,7 +23,9 @@ io.on('connection', function(socket){
         console.log('translated message: ' + translation.translatedText);
         io.emit('add message', translation.translatedText);
       }
-    });
+        
+     });
+
   });
 
   socket.on('disconnect', function(){
