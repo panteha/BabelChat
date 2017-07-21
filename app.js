@@ -48,7 +48,7 @@ io.on('connection', function(socket){
         io.emit('add message', translation.translatedText);
       }
         
-    });
+     });
   });
 
   socket.on('disconnect', function(){
