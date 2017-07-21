@@ -57,5 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+package.json
 package-lock.json
 *.min.js

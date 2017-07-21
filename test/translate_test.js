@@ -12,7 +12,7 @@ describe("translation", function () {
     };
 
   beforeEach(function (done) {
-    server = require('../app').server;
+    server = require('../index').server;
     done();
   });
 

@@ -1,21 +1,3 @@
-
-var mongoose = require('mongoose');
-var Message = require('./models/message');
-// mongoose.connect('mongodb://localhost/babelchat_test');
-
-var app = require('express')();
-
-// import environmental variables from our development.env file
-
-require('dotenv').config();
-const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
-
-//Connect to our Database and handle an bad connections
-mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
-  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
-});
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -35,12 +17,6 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translate(msg, 'fa', function(err, translation) {
-
-      var message = new Message({content : msg});
-      message.save(function(err){
-        if(err) throw err;
-
-        console.log('User saved successfully!');
       if (translation === undefined) {
         io.emit('add message', msg);
       } else {
@@ -49,6 +25,7 @@ io.on('connection', function(socket){
       }
         
      });
+
   });
 
   socket.on('disconnect', function(){
@@ -57,6 +34,5 @@ io.on('connection', function(socket){
 });
 
 http.listen(process.env.PORT || 3000, function(){
-  
   console.log('listening on *:3000');
 });
