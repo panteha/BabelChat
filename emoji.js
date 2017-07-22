@@ -37,11 +37,27 @@ export class EmojiBox extends React.Component {
 };
 
 export class EmojiTextBox extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {value: ""};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSelect(emoji){
+    this.setState({value: emoji})
+  }
+
   render(){
     return (
     <div>
-      <EmojiBox />
-      <input type="text" className="textbox" value="Hello" />
+      <EmojiBox onSelect={this.handleSelect} />
+      <input type="text" className="textbox"
+              value={this.state.value} onChange={this.handleChange} />
     </div>);
   }
 };
