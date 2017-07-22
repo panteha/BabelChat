@@ -30,7 +30,7 @@ export class EmojiBox extends React.Component {
     var emoji = [];
     for (var name in emojis) {
       // React needs a key property for child components
-      emoji.push(<Emoji key={name} type={name} />);
+      emoji.push(<Emoji key={name} type={name} onClick={this.props.onSelect} />);
     }
     return (<div id="emojis">{emoji}</div>)
   }
