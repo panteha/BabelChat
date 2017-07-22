@@ -27,4 +27,11 @@ describe('<Emoji />', () => {
     var text = dom.find('.happy').text();
     expect(text).to.have.string('😊');
   });
+
+  it('responds to onClick', () => {
+    var callback = sinon.spy();
+    const dom = mount(<Emoji type="cool" onClick={callback} />);
+    var text = dom.find('.cool').simulate('click');
+    expect(callback.calledWith('😎')).to.be.true;
+  });
 });

@@ -11,9 +11,16 @@ var emojis = {
 };
 
 export function Emoji(props) {
+  var my_emoji = emojis[props.type];
+  function handleClick(e) {
+    e.preventDefault();
+    if (props.onClick) {
+      props.onClick(my_emoji);
+    }
+  }
   return (
-    <button className={props.type}>
-      {emojis[props.type]}
+    <button className={props.type} onClick={handleClick}>
+      {my_emoji}
     </button>
   );
 };
