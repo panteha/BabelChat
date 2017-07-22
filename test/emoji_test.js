@@ -42,5 +42,13 @@ describe('<EmojiTextBox />', () => {
     const dom = mount(<EmojiTextBox />);
     dom.find('.cool').simulate('click');
     expect(dom.find('.textbox').props().value).to.have.string('😎');
-  })
+  });
+
+  it('adds new emojis to the end of the previous emoji', () => {
+    const dom = mount(<EmojiTextBox />);
+    dom.find('.cool').simulate('click');
+    dom.find('.happy').simulate('click');
+    expect(dom.find('.textbox').props().value).to.have.string('😎😊');
+  });
+
 });

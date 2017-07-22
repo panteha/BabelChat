@@ -49,14 +49,14 @@ export class EmojiTextBox extends React.Component {
   }
 
   handleSelect(emoji){
-    this.setState({value: emoji})
+    this.setState({value: this.state.value + emoji})
   }
 
   render(){
     return (
     <div>
       <EmojiBox onSelect={this.handleSelect} />
-      <input type="text" className="textbox"
+      <input ref="textbox" type="text" className="textbox"
               value={this.state.value} onChange={this.handleChange} />
     </div>);
   }
