@@ -4,13 +4,24 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.5.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "google-translate": "^2.0.5",
+    "mocha": "^3.4.2",
+    "mongod": "^2.0.0",
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.3",
+    "node-env-file": "^0.1.8",
+    "promise": "^8.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "sinon": "^2.3.8",
+    "sinon-mongoose": "^2.0.2",
     "socket.io": "^2.0.3",
     "webpack": "^3.3.0"
   },
@@ -25,8 +36,8 @@
     "sinon": "^2.3.8"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha --compilers js:babel-core/register -r jsdom-global/register"
+    "start": "env NODE_ENV=development node app.js",
+    "test": "env NODE_ENV=test mocha --compilers js:babel-core/register -r jsdom-global/register"
   },
   "repository": {
     "type": "git",

@@ -5,10 +5,9 @@ var chai = require('chai'),
 var io = require('socket.io-client');
 
 describe("translation", function () {
-  var server;
 
   beforeEach(function (done) {
-    server = require('../app');
+    require('../app');
     done();
   });
 
