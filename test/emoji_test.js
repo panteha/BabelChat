@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { EmojiBox, Emoji } from '../emoji';
+import { EmojiBox, Emoji, EmojiTextBox } from '../emoji';
 
 describe('<EmojiBox />', () => {
   it('selects an emoji', () => {
@@ -31,7 +31,16 @@ describe('<Emoji />', () => {
   it('responds to onClick', () => {
     var callback = sinon.spy();
     const dom = mount(<Emoji type="cool" onClick={callback} />);
-    var text = dom.find('.cool').simulate('click');
+    dom.find('.cool').simulate('click');
     expect(callback.calledWith('😎')).to.be.true;
   });
+
+});
+
+describe('<EmojiTextBox />', () => {
+  it('when you click an emoji, it is added to the text box', () => {
+    const dom = mount(<EmojiTextBox />);
+    dom.find('.cool').simulate('click');
+    expect(dom.find('.textbox').props().value).to.have.string('😎');
+  })
 });

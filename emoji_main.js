@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Emoji, EmojiBox} from './emoji';
+import {Emoji, EmojiBox, EmojiTextBox} from './emoji';
 
 ReactDOM.render(
-  (//<Emoji type="happy" />
-  <EmojiBox />
+  (
+  <EmojiTextBox />
+
   ),
   document.querySelector("#content")
 );

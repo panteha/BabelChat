@@ -35,3 +35,13 @@ export class EmojiBox extends React.Component {
     return (<div id="emojis">{emoji}</div>)
   }
 };
+
+export class EmojiTextBox extends React.Component {
+  render(){
+    return (
+    <div>
+      <EmojiBox />
+      <input type="text" className="textbox" value="Hello" />
+    </div>);
+  }
+};
