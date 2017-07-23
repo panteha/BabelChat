@@ -43,14 +43,16 @@ export class SendMessage extends React.Component {
 
   handleSend(e) {
     e.preventDefault();
-    socket.emit('chat message', this.state.message);
+    var my_socket = this.props.socket || socket;
+    console.log('sending message...')
+    my_socket.emit('chat message', this.state.message);
     this.setState({message: ''});
   }
 
   render() {
     return (<form onSubmit={this.handleSend}>
       <EmojiTextBox value={this.state.message} onChange={this.handleTextChange} />
-      <input type="submit" value="Send" />
+      <input type="submit" className="send" value="Send" />
     </form>)
   }
 }

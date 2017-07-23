@@ -1,12 +1,8 @@
-// TODO: test MessageList: test that a message shows up
-// TODO: test SendMessage: when the form is submitted, a message is sent
-// TODO: test BabelChat: check that when the language is changed, the displayed messages change
-
 import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { SelectLanguage, MessageList } from '../babelchat';
+import { SelectLanguage, MessageList, SendMessage } from '../babelchat';
 require('../app');
 var io = require('socket.io-client');
 
@@ -30,5 +26,16 @@ describe("MessageList", function(){
       expect(dom.find('li').text()).to.have.string("Hello");
       done();
     }, 500);
+  })
+});
+
+describe("SendMessage", function(){
+  it("when the form is submitted, a message is sent", function(done){
+    var spy = sinon.spy();
+    const dom = mount(<SendMessage socket={{emit: spy }} />);
+    dom.find('.textbox').simulate('change', {target: {value: 'Hello'}});
+    dom.find('form').simulate('submit');
+    expect(spy.calledWith('chat message', 'Hello')).to.be.true;
+    done();
   })
 });

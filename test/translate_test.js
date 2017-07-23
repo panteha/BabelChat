@@ -4,9 +4,6 @@ var chai = require('chai'),
 
 var io = require('socket.io-client');
 
-// TODO: test translate.js
-// TODO: translateMessage and getLanguages
-
 describe("translation", function () {
 
   beforeEach(function (done) {
