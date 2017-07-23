@@ -56,11 +56,30 @@ class SendMessage extends React.Component {
 }
 
 class SelectLanguage extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {languageCodes: {}};
+    this.handleListOfLanguages = this.handleListOfLanguages.bind(this);
+    // when you receive 'list of languages', run this function with any
+    // additional parameters as arguments to the function.
+    socket.on('list of languages', this.handleListOfLanguages);
+    // send 'get languages' down the connection to the server
+    socket.emit('get languages');
+  }
+
+  handleListOfLanguages(languageCodes){
+    this.setState({languageCodes: languageCodes});
+  }
+
   render(){
+    var languages = [];
+    for (var shortCode in this.state.languageCodes){
+      languages.push(<option value={shortCode} key={shortCode}>
+        {this.state.languageCodes[shortCode]}</option>);
+    }
     return(
       <select name="languages">
-        <option value="en">English</option>
-        <option value="fa">Farsi</option>
+        {languages}
       </select>
   )
   }
@@ -69,13 +88,6 @@ class SelectLanguage extends React.Component{
 
 class BabelChat extends React.Component {
   render() {
-    // send 'get languages' down the connection to the server
-    // socket.emit('get languages');
-    // // when you receive 'list of languages', run this function with any
-    // // additional parameters as arguments to the function.
-    // socket.on('list of languages', function(languageCodes){
-    //   console.log(languageCodes);
-    // })
     return (
       <div>
         <SelectLanguage />
