@@ -3,6 +3,7 @@ var Message = require('./models/message');
 // mongoose.connect('mongodb://localhost/babelchat_test');
 
 var app = require('express')();
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('google-translate')(process.env.TRANSLATE_KEY);
@@ -17,6 +18,10 @@ mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+});
+
+app.get('/sign_up', function(req, res){
+  res.sendFile('/sign_up.ejs');
 });
 
 app.get('/', function(req, res){
