@@ -10,7 +10,8 @@ export class MessageList extends React.Component {
     super(props);
     this.state = {messages: []};
     this.handleAddMessage = this.handleAddMessage.bind(this);
-    socket.on('add message', this.handleAddMessage);
+    var my_socket = this.props.socket || socket;
+    my_socket.on('add message', this.handleAddMessage);
   }
 
   handleAddMessage(msg) {

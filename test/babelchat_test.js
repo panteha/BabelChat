@@ -1,4 +1,3 @@
-// TODO: test SelectLanguage: test that it contains some languages
 // TODO: test MessageList: test that a message shows up
 // TODO: test SendMessage: when the form is submitted, a message is sent
 // TODO: test BabelChat: check that when the language is changed, the displayed messages change
@@ -7,7 +6,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { SelectLanguage } from '../babelchat';
+import { SelectLanguage, MessageList } from '../babelchat';
 require('../app');
 var io = require('socket.io-client');
 
@@ -20,4 +19,16 @@ describe("SelectLanguage", function(){
       done();
     }, 500);
   });
+});
+
+describe("MessageList", function(){
+  it("when a message is sent, the message will show up", function(done){
+    var socket = io.connect("http://localhost:3000");
+    const dom = mount(<MessageList language="en" socket={socket} />);
+    socket.emit('chat message',"Hello");
+    setTimeout(function() {
+      expect(dom.find('li').text()).to.have.string("Hello");
+      done();
+    }, 500);
+  })
 });
