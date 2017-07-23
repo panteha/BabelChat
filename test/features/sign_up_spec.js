@@ -9,7 +9,7 @@ describe('User visits signup page', function() {
   const browser = new Browser();
 
   before(function(done) {
-    browser.visit('/sign_up', done);
+    browser.visit('/signup', done);
   });
 
   describe('submits form', function() {
