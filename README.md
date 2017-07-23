@@ -45,12 +45,28 @@ then visit `http://localhost:3000/`
  * `npm install --save-dev chai`
  * `npm install --save-dev enzyme`
  * `npm install --save-dev sinon`
+ * `npm install --save-dev sinon-mongoose`
  * `npm install --save-dev react-test-renderer`
  * `npm install --save-dev jsdom jsdom-global`
 
-
 To run:
  * `./node_modules/mocha/bin/mocha`
+
+## mongodb
+
+  * Have 2 terminals open
+    * 1. running mongod (or sudo mongod)
+    * 2. mongo
+      * a. Add new database 'use babelchat_test'
+      * b. this will only show when a record is added
+
+  mongod MUST BE RUNNING AT ALL TIMES TO SAVE database
+
+  * to view database information
+    * show dbs (this shows all current databases)
+    * use database name (this command opens the database)
+    * show collections (lists models)
+    * db.messages.find().pretty() (lists all records within messages)
 
 ## Team Members
 [Panteha Ahmadi](https://github.com/panteha)
