@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var Message = require('./models/message');
 // mongoose.connect('mongodb://localhost/babelchat_test');
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('google-translate')(process.env.TRANSLATE_KEY);
@@ -19,6 +20,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
+app.use(express.static('public'))
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });

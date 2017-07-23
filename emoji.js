@@ -39,17 +39,16 @@ export class EmojiBox extends React.Component {
 export class EmojiTextBox extends React.Component {
   constructor(props){
     super(props);
-    this.state = {value: ""};
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.props.onChange(event.target.value);
   }
 
   handleSelect(emoji){
-    this.setState({value: this.state.value + emoji})
+    this.props.onChange(this.props.value + emoji);
   }
 
   render(){
@@ -57,7 +56,7 @@ export class EmojiTextBox extends React.Component {
     <div>
       <EmojiBox onSelect={this.handleSelect} />
       <input ref="textbox" type="text" className="textbox"
-              value={this.state.value} onChange={this.handleChange} />
+              value={this.props.value} onChange={this.handleChange} />
     </div>);
   }
 };

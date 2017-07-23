@@ -39,16 +39,19 @@ describe('<Emoji />', () => {
 
 describe('<EmojiTextBox />', () => {
   it('when you click an emoji, it is added to the text box', () => {
-    const dom = mount(<EmojiTextBox />);
+    var callback = sinon.spy();
+    const dom = mount(<EmojiTextBox value='' onChange={callback} />);
     dom.find('.cool').simulate('click');
-    expect(dom.find('.textbox').props().value).to.have.string('😎');
+    expect(callback.calledWith('😎')).to.be.true;
   });
 
   it('adds new emojis to the end of the previous emoji', () => {
-    const dom = mount(<EmojiTextBox />);
+    var callback = sinon.spy();
+    const dom = mount(<EmojiTextBox value='' onChange={callback} />);
     dom.find('.cool').simulate('click');
+    expect(callback.calledWith('😎')).to.be.true;
     dom.find('.happy').simulate('click');
-    expect(dom.find('.textbox').props().value).to.have.string('😎😊');
+    expect(callback.calledWith('😊')).to.be.true;
   });
 
 });

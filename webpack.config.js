@@ -5,7 +5,7 @@ var DEV = path.resolve(__dirname);
 var OUTPUT = path.resolve(__dirname) + "/public";
 
 var config = {
-  entry: DEV + "/emoji_main.js",
+  entry: DEV + "/frontend.js",
   output: {
     path: OUTPUT,
     filename: "scripts.min.js"
