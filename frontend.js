@@ -8,9 +8,9 @@ var socket = io();
 class MessageList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {messages: []};
     this.handleAddMessage = this.handleAddMessage.bind(this);
     socket.on('add message', this.handleAddMessage);
-    this.state = {messages: []};
   }
 
   handleAddMessage(msg) {

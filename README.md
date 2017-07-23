@@ -28,6 +28,7 @@ Engage team after struggling for more than 45mins
  * `npm install react react-dom --save`
  * `npm install webpack --save`
  * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
+ * `npm install --save async`
 
 To set up Google Translate API for Heroku
  * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
@@ -46,6 +47,7 @@ then visit `http://localhost:3000/`
  * `npm install --save-dev sinon`
  * `npm install --save-dev react-test-renderer`
  * `npm install --save-dev jsdom jsdom-global`
+
 
 To run:
  * `./node_modules/mocha/bin/mocha`

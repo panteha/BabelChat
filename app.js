@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Message = require('./models/message');
 // mongoose.connect('mongodb://localhost/babelchat_test');
-
+var async = require('async');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -24,6 +24,25 @@ app.use(express.static('public'))
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+
+const LANGUAGES = ['en','fa', 'es'];
+
+function translateMessage(msg, callback){
+  async.map(LANGUAGES, function(language, callback){
+
+    translate.translate(msg, language, function(err, translation) {
+      if (translation === undefined) {
+        callback(null, {language: language, message: msg});
+      } else {
+        console.log('translated message: ' + translation.translatedText);
+        callback(null, {language: language, message: translation.translatedText});
+      }
+    });
+  }, function(err, results) {
+      console.log(JSON.stringify(results));
+  });
+
+}
 
 io.on('connection', function(socket){
   console.log('a user connected');
