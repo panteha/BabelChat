@@ -22,7 +22,7 @@ class MessageList extends React.Component {
   render() {
     var items = [];
     for (var index in this.state.messages) {
-      items.push(<li key={index}>{this.state.messages[index]}</li>)
+      items.push(<li key={index}>{this.state.messages[index]['fa']}</li>)
     }
     return (<ul>{items}</ul>)
   }

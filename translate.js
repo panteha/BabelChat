@@ -3,7 +3,7 @@ var translate = require('google-translate')(process.env.TRANSLATE_KEY);
 
 const LANGUAGES = ['en','fa', 'es'];
 
-function translateMessage(msg, callback){
+var translateMessage = function(msg, callback){
   async.map(LANGUAGES, function(language, callback){
 
     translate.translate(msg, language, function(err, translation) {
@@ -23,3 +23,5 @@ function translateMessage(msg, callback){
   });
 
 }
+
+module.exports = {translateMessage:translateMessage};
