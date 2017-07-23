@@ -4,6 +4,9 @@ var chai = require('chai'),
 
 var io = require('socket.io-client');
 
+// TODO: test translate.js
+// TODO: translateMessage and getLanguages
+
 describe("translation", function () {
 
   beforeEach(function (done) {
@@ -16,7 +19,7 @@ describe("translation", function () {
 
       client.once("connect", function () {
           client.once("add message", function (msg) {
-              msg.should.equal("سلام");
+              msg['fa'].should.equal("سلام");
 
               client.disconnect();
               done();
