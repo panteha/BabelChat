@@ -22,7 +22,7 @@ class MessageList extends React.Component {
   render() {
     var items = [];
     for (var index in this.state.messages) {
-      items.push(<li key={index}>{this.state.messages[index]['fa']}</li>)
+      items.push(<li key={index}>{this.state.messages[index][this.props.language]}</li>)
     }
     return (<ul>{items}</ul>)
   }
@@ -48,10 +48,10 @@ class SendMessage extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<form onSubmit={this.handleSend}>
       <EmojiTextBox value={this.state.message} onChange={this.handleTextChange} />
-      <button onClick={this.handleSend}>Send</button>
-    </div>)
+      <input type="submit" value="Send" />
+    </form>)
   }
 }
 
@@ -60,6 +60,7 @@ class SelectLanguage extends React.Component{
     super(props);
     this.state = {languageCodes: {}};
     this.handleListOfLanguages = this.handleListOfLanguages.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     // when you receive 'list of languages', run this function with any
     // additional parameters as arguments to the function.
     socket.on('list of languages', this.handleListOfLanguages);
@@ -71,6 +72,10 @@ class SelectLanguage extends React.Component{
     this.setState({languageCodes: languageCodes});
   }
 
+  handleChange(event){
+    this.props.onChange(event.target.value);
+  }
+
   render(){
     var languages = [];
     for (var shortCode in this.state.languageCodes){
@@ -78,7 +83,7 @@ class SelectLanguage extends React.Component{
         {this.state.languageCodes[shortCode]}</option>);
     }
     return(
-      <select name="languages">
+      <select value={this.props.language} onChange={this.handleChange}>
         {languages}
       </select>
   )
@@ -87,11 +92,23 @@ class SelectLanguage extends React.Component{
 
 
 class BabelChat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {language: 'en'};
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
+  }
+
+  handleLanguageChange(newLanguage){
+    this.setState({language: newLanguage});
+    console.log("New chosen language is:" + newLanguage);
+  }
+
   render() {
     return (
       <div>
-        <SelectLanguage />
-        <MessageList />
+        <SelectLanguage language={this.state.language}
+                        onChange={this.handleLanguageChange} />
+        <MessageList language={this.state.language} />
         <SendMessage />
       </div>
     )

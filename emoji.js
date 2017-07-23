@@ -19,7 +19,7 @@ export function Emoji(props) {
     }
   }
   return (
-    <button className={props.type} onClick={handleClick}>
+    <button type="button" className={props.type} onClick={handleClick}>
       {my_emoji}
     </button>
   );
@@ -32,7 +32,7 @@ export class EmojiBox extends React.Component {
       // React needs a key property for child components
       emoji.push(<Emoji key={name} type={name} onClick={this.props.onSelect} />);
     }
-    return (<div id="emojis">{emoji}</div>)
+    return (<div className="emojis">{emoji}</div>)
   }
 };
 
@@ -53,7 +53,7 @@ export class EmojiTextBox extends React.Component {
 
   render(){
     return (
-    <div>
+    <div className="emojitextbox">
       <EmojiBox onSelect={this.handleSelect} />
       <input ref="textbox" type="text" className="textbox"
               value={this.props.value} onChange={this.handleChange} />

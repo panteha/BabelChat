@@ -1,13 +1,20 @@
 var async = require('async');
 var translate = require('google-translate')(process.env.TRANSLATE_KEY);
 
-const LANGUAGES = ['en','fa', 'es'];
+const LANGUAGES = ['en', 'fa', 'es'];
 
 var getLanguages = function(callback){
+  var validLanguage = {};
+  for (var index in LANGUAGES) {
+    validLanguage[LANGUAGES[index]] = true;
+  }
   translate.getSupportedLanguages('en', function(err, languageCodes) {
     var finalResult = {};
     for(var i in languageCodes){
-      finalResult[languageCodes[i]["language"]]= languageCodes[i]["name"];
+      var shortCode = languageCodes[i]["language"];
+      if (validLanguage[shortCode]) {
+        finalResult[shortCode] = languageCodes[i]["name"];
+      }
     }
     callback(err, finalResult);
   });
