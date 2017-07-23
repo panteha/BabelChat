@@ -55,10 +55,30 @@ class SendMessage extends React.Component {
   }
 }
 
+class SelectLanguage extends React.Component{
+  render(){
+    return(
+      <select name="languages">
+        <option value="en">English</option>
+        <option value="fa">Farsi</option>
+      </select>
+  )
+  }
+}
+
+
 class BabelChat extends React.Component {
   render() {
+    // send 'get languages' down the connection to the server
+    // socket.emit('get languages');
+    // // when you receive 'list of languages', run this function with any
+    // // additional parameters as arguments to the function.
+    // socket.on('list of languages', function(languageCodes){
+    //   console.log(languageCodes);
+    // })
     return (
       <div>
+        <SelectLanguage />
         <MessageList />
         <SendMessage />
       </div>

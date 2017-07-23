@@ -28,6 +28,12 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('a user connected');
 
+  socket.on('get languages', function(){
+    translate.getLanguages(function(err, languageCodes){
+      socket.emit('list of languages', languageCodes);
+    });
+  })
+
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
