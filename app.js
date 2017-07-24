@@ -7,10 +7,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var Message = require('./models/message');
-
-// mongoose.connect('mongodb://localhost/babelchat_test');
-
-var app = require('express')();
+var async = require('async');
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var translate = require('./translate');
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -30,11 +32,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var translate = require('google-translate')(process.env.TRANSLATE_KEY);
-
 // import environmental variables from our development.env file
 
 require('dotenv').config();
@@ -47,6 +44,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
+app.use(express.static('public'))
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -55,16 +53,20 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('a user connected');
 
+  socket.on('get languages', function(){
+    translate.getLanguages(function(err, languageCodes){
+      socket.emit('list of languages', languageCodes);
+    });
+  })
+
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
-    translate.translate(msg, 'fa', function(err, translation) {
-      console.log('translated message: ' + translation.translatedText);
-      io.emit('add message', translation.translatedText);
+    translate.translateMessage(msg, function(err, translations) {
+      io.emit('add message', translations);
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
-
         console.log('User saved successfully!');
       });
     });
@@ -74,7 +76,8 @@ io.on('connection', function(socket){
     console.log('user disconnected');
   });
 });
-// listens
-http.listen(process.env.PORT || 3000, function(){
-  console.log('listening on *:3000');
+
+var port = process.env.PORT || 3000;
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });
