@@ -2,7 +2,7 @@ const Browser = require('zombie');
 
 // We're going to make requests to http://example.com/signup
 // Which will be routed to our test server localhost:3000
-Browser.localhost('babelchat.com', 3000);
+Browser.localhost('localhost', 3000);
 
 describe('User visits signup page', function() {
 
@@ -18,7 +18,7 @@ describe('User visits signup page', function() {
       browser
         .fill('email',    'zombie@underworld.dead')
         .fill('password', 'eat-the-living')
-        .pressButton('Sign Me Up!', done);
+        .pressButton('SignUp', done);
     });
 
     it('should be successful', function() {
