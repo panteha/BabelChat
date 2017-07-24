@@ -28,8 +28,10 @@ Engage team after struggling for more than 45mins
  * `npm install react react-dom --save`
  * `npm install webpack --save`
  * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
- * `npm install sinon --save`
- * `npm install sinon-mongoose --save`
+ * `npm install --save async`
+
+To set up Google Translate API for Heroku
+ * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
 
 To run:
  * `node index.js`
@@ -39,8 +41,16 @@ then visit `http://localhost:3000/`
 ##  Testing
 
  * Install Mocha, Chai:
- * `npm install --save mocha`
- * `npm install --save chai`
+ * `npm install --save-dev mocha`
+ * `npm install --save-dev chai`
+ * `npm install --save-dev enzyme`
+ * `npm install --save-dev sinon`
+ * `npm install --save-dev sinon-mongoose`
+ * `npm install --save-dev react-test-renderer`
+ * `npm install --save-dev jsdom jsdom-global`
+
+To run:
+ * `./node_modules/mocha/bin/mocha`
 
 ## mongodb
 
@@ -57,9 +67,6 @@ then visit `http://localhost:3000/`
     * use database name (this command opens the database)
     * show collections (lists models)
     * db.messages.find().pretty() (lists all records within messages)
-
-To run:
- * `./node_modules/mocha/bin/mocha`
 
 ## Team Members
 [Panteha Ahmadi](https://github.com/panteha)
