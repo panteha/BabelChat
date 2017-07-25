@@ -51,9 +51,9 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-function getUserName(){
-  return "username1"
-};
+function getUsername() {
+  return "username1";
+}
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -68,7 +68,8 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
-      io.emit('add message', {user: getUserName(), msg: translations});
+      // io.emit('add message', translations);
+      io.emit('add message', {user: getUsername(), msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
