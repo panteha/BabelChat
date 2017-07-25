@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var Message = require('./models/message');
+var User = require('./models/user');
 var async = require('async');
 var express = require('express');
 var app = express();
@@ -50,6 +51,10 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+function getUserName(){
+  return "username1"
+};
+
 io.on('connection', function(socket){
   console.log('a user connected');
 
@@ -63,7 +68,7 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
-      io.emit('add message', translations);
+      io.emit('add message', {user: getUserName(), msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
