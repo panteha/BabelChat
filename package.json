@@ -50,7 +50,8 @@
 
   "scripts": {
     "start": "env NODE_ENV=development node app.js",
-    "test": "env NODE_ENV=test nyc mocha --compilers js:babel-core/register -r jsdom-global/register"
+    "test": "env NODE_ENV=test nyc mocha --compilers js:babel-core/register -r jsdom-global/register",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
