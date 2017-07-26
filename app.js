@@ -7,13 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var Message = require('./models/message');
+var User = require('./models/user');
 var async = require('async');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
-
+var userEmail = 'namey mcnameface';
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
@@ -46,8 +47,25 @@ mongoose.connection.on('error', (err) => {
 
 app.use(express.static('public'))
 
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  //prints out current user
+   userEmail = req.user.local.email;
+  next();
+});
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
+//Checks if user is authenticated
+  function isAuthenticated(req,res,next){
+   if(req.user)
+      return next();
+   else
+      return res.status(401).json({
+        error: 'User not authenticated'
+      })
+
+}
 });
 
 io.on('connection', function(socket){
@@ -63,7 +81,8 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
-      io.emit('add message', translations);
+      // io.emit('add message', translations);
+      io.emit('add message', {user: userEmail, msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;

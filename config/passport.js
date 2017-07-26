@@ -1,5 +1,5 @@
 // config/passport.js
-
+var currentUser 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
 
@@ -63,6 +63,7 @@ module.exports = function(passport) {
 
                 // set the user's local credentials
                 newUser.local.email    = email;
+                currentUser        = email;
                 newUser.local.password = newUser.generateHash(password);
 
                 // save the user
@@ -111,6 +112,7 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
+            currentUser = email;
             return done(null, user);
         });
 
