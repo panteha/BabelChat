@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -13,6 +14,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
+
+var users = require('./routes/users');
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -44,6 +47,19 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
+// BodyParser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Express Session
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+// Set Static Folder
 app.use(express.static('public'))
 
 app.get('/', function(req, res){

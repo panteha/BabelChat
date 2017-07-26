@@ -1,6 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Emoji, EmojiBox, EmojiTextBox} from './emoji';
+import {NavBar} from './components/NavBar';
+
+var navLinks = [
+  {
+    title: "Home",
+    href: "#"
+  },
+  {
+    title: "Register",
+    href: "#"
+  },
+  {
+    title: "Login",
+    href: "#"
+  }
+]
+
 const io = require('socket.io-client');
 
 var socket = io();
@@ -109,6 +126,7 @@ export class BabelChat extends React.Component {
   render() {
     return (
       <div>
+        <NavBar bgColor="cornflowerblue" titleColor="lemonchiffon" linkColor="lightblue" navData={navLinks}/>
         <SelectLanguage language={this.state.language}
                         onChange={this.handleLanguageChange} />
         <MessageList language={this.state.language} />
