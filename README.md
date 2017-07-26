@@ -33,6 +33,7 @@ Engage team after struggling for more than 45mins
 
 To set up Google Translate API for Heroku
  * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
+ * ` heroku config:set DATABASE_DEVELOPMENT=mongodb://<username>:<password>@<hostname>.mlab.com:<port>/babelchat`
 
 To run:
  * `node index.js`
