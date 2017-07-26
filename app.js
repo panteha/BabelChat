@@ -48,12 +48,22 @@ app.use(express.static('public'))
 
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
-  console.log(req.body)
-  next();
+  //prints out current user
+  console.log(req.user.local.email)
 });
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
+//Checks if user is authenticated
+  function isAuthenticated(req,res,next){
+   if(req.user)
+      return next();
+   else
+      return res.status(401).json({
+        error: 'User not authenticated'
+      })
+
+}
 });
 
 io.on('connection', function(socket){
@@ -70,7 +80,6 @@ io.on('connection', function(socket){
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
       io.emit('add message', translations);
-      // console.log(req.body);
       var message = new Message({content : msg} );
       message.save(function(err){
         if(err) throw err;

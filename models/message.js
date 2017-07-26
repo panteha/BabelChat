@@ -10,7 +10,7 @@ var messageSchema = new Schema({
   updated_at: Date,
   
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
 });
