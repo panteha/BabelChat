@@ -1,30 +1,38 @@
-var React = require('react');
-var NavItem = require('./NavItem.jsx');
+import React from "react";
+import {NavItem} from "./NavItem";
 
-var NavBar = React.createClass({
-  render: function() {
+export class NavBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.createLinkItem = this.createLinkItem.bind(this);
+  };
+  
+  render() {
 
     var navStyle = {
       WebkitBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
       MozBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
       boxShadow: "0 0 4px rgba(0,0,0,0.4)",
       borderRadius: 0
-    }  
+    };  
     
     var titleStyle = {};
     var linkStyle = {};
     
-    if (this.props.bgColor)
+    if (this.props.bgColor) {
       navStyle.background = this.props.bgColor;
+    }
     
-    if (this.props.titleColor)
+    if (this.props.titleColor) {
       titleStyle.color = this.props.titleColor;
+    }
     
-    if (this.props.linkColor)
+    if (this.props.linkColor) {
       linkStyle.color = this.props.linkColor;
+    }
     
-    var createLinkItem = function(item, index) {
-      return <NavItem aStyle={linkStyle} key={item.title + index} href={item.href} title={item.title} />
+    createLinkItem(item, index) {
+      return (<NavItem aStyle={linkStyle} key={item.title + index} href={item.href} title={item.title} />);
     }
 
     return (
@@ -45,6 +53,5 @@ var NavBar = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = NavBar;
