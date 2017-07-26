@@ -14,7 +14,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
-
+var userEmail = 'namey mcnameface';
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
@@ -50,7 +50,10 @@ app.use(express.static('public'))
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   //prints out current user
-  var userEmail = req.user.local.email;
+   userEmail = req.user.local.email;
+   console.log(userEmail);
+  console.log(req.user.local.email);
+  next();
 });
 
 app.get('/', function(req, res){
