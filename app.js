@@ -51,8 +51,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   //prints out current user
    userEmail = req.user.local.email;
-   console.log(userEmail);
-  console.log(req.user.local.email);
   next();
 });
 
