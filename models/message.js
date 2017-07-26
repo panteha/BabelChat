@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 var messageSchema = new Schema({
   content: String,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  creator : String
 
 });
 

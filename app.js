@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var Message = require('./models/message');
+var User = require('./models/user');
 var async = require('async');
 var express = require('express');
 var app = express();
@@ -64,7 +65,9 @@ io.on('connection', function(socket){
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
       io.emit('add message', translations);
-      var message = new Message({content : msg});
+      console.log(passport.sessionUser);
+
+      var message = new Message({content : msg, created_at : Date.now(), creator : "Hello"});
       message.save(function(err){
         if(err) throw err;
         console.log('User saved successfully!');

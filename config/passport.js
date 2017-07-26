@@ -17,14 +17,15 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+      var sessionUser = { _id: user._id, email: user.email}
+      done(null, sessionUser)
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(function(sessionUser, done) {
+        // User.findById(id, function(err, user) {
+            done(null, sessionUser);
+        // });
     });
 
     // =========================================================================
@@ -117,4 +118,4 @@ module.exports = function(passport) {
     }));
 
 };
-
+// module.exports = currentUser;
