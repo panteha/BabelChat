@@ -15,8 +15,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
 
-var users = require('./routes/users');
-
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application

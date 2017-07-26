@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Emoji, EmojiBox, EmojiTextBox} from './emoji';
-import {NavBar} from './components/NavBar';
+import {NavBar} from './components/NavigationBar.jsx';
 
 var navLinks = [
   {
@@ -16,7 +16,7 @@ var navLinks = [
     title: "Login",
     href: "#"
   }
-]
+];
 
 const io = require('socket.io-client');
 

@@ -13,7 +13,7 @@ var config = {
   module: {
     loaders: [{
         include: DEV,
-        loader: "babel-loader",
+        loader: "babel-loader"
     }]
   }
 };
