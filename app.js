@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var Message = require('./models/message');
+var User = require('./models/user');
 var async = require('async');
 var express = require('express');
 var app = express();
@@ -49,7 +50,7 @@ app.use(express.static('public'))
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   //prints out current user
-  console.log(req.user.local.email)
+  var userEmail = req.user.local.email;
 });
 
 app.get('/', function(req, res){
@@ -79,8 +80,9 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
-      io.emit('add message', translations);
-      var message = new Message({content : msg} );
+      // io.emit('add message', translations);
+      io.emit('add message', {user: userEmail, msg: translations});
+      var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
         console.log('User saved successfully!');
