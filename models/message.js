@@ -3,10 +3,16 @@ var Schema = mongoose.Schema;
 
 
 var messageSchema = new Schema({
-  content: String,
+  content: {
+    type: String,
+  },
   created_at: Date,
-  updated_at: Date
-
+  updated_at: Date,
+  
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 var Message = mongoose.model('Message', messageSchema);

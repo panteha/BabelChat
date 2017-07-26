@@ -46,6 +46,12 @@ mongoose.connection.on('error', (err) => {
 
 app.use(express.static('public'))
 
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  console.log(req.body)
+  next();
+});
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
@@ -64,7 +70,8 @@ io.on('connection', function(socket){
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
       io.emit('add message', translations);
-      var message = new Message({content : msg});
+      // console.log(req.body);
+      var message = new Message({content : msg} );
       message.save(function(err){
         if(err) throw err;
         console.log('User saved successfully!');
