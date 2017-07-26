@@ -25,7 +25,7 @@ export class MessageList extends React.Component {
     for (var index in this.state.messages) {
       items.push(<li key={index}>{this.state.messages[index][this.props.language]}</li>)
     }
-    return (<ul>{items}</ul>)
+    return (<ul>{items.reverse()}</ul>)
   }
 }
 
@@ -112,7 +112,7 @@ export class BabelChat extends React.Component {
         <SelectLanguage language={this.state.language}
                         onChange={this.handleLanguageChange} />
         <MessageList language={this.state.language} />
-        <SendMessage />
+        <div><SendMessage /></div>
       </div>
     )
   }
