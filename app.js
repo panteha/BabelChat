@@ -47,13 +47,25 @@ mongoose.connection.on('error', (err) => {
 
 app.use(express.static('public'))
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  //prints out current user
+  var userEmail = req.user.local.email;
 });
 
-function getUsername() {
-  return "username1";
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+//Checks if user is authenticated
+  function isAuthenticated(req,res,next){
+   if(req.user)
+      return next();
+   else
+      return res.status(401).json({
+        error: 'User not authenticated'
+      })
+
 }
+});
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -69,7 +81,7 @@ io.on('connection', function(socket){
     // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
       // io.emit('add message', translations);
-      io.emit('add message', {user: getUsername(), msg: translations});
+      io.emit('add message', {user: userEmail, msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
