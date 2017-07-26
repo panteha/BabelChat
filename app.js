@@ -50,11 +50,11 @@ app.use(express.static('public'))
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   //prints out current user
-   userEmail = req.user.local.email;
   next();
 });
 
 app.get('/', function(req, res){
+  userEmail = req.user.local.email;
   res.sendFile(__dirname + '/index.html');
 //Checks if user is authenticated
   function isAuthenticated(req,res,next){
