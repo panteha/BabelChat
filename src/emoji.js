@@ -5,9 +5,14 @@ var emojis = {
   'happy': '😊',
   'laughing': '😄',
   'cool': '😎',
+  'winking': '😉',
+  'savoring': '😋',
+  'hugging': '🤗',
+  'plus': '👍',
   'sad': '😞',
   'surprise': '😳',
   'angry': '😡',
+  'persevering': '😣'
 };
 
 export function Emoji(props) {
