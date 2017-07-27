@@ -26,7 +26,7 @@ export class MessageList extends React.Component {
       var message = this.state.messages[index];
       console.log('----Prints out msg-----');
       console.log(message);
-      items.push(<li key={index}>{message.user}: {message.msg[this.props.language]}</li>)
+      items.push(<li key={index}><span><strong>{message.user}:</strong></span> {message.msg[this.props.language]}</li>)
     }
     return (<ul>{items}</ul>)
   }
