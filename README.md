@@ -52,7 +52,7 @@ then visit `http://localhost:3000/`
  * `npm install --save-dev jsdom jsdom-global`
 
 To run:
- * `./node_modules/mocha/bin/mocha`
+ * `webpack; npm start`
 
 ## mongodb
 
