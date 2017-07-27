@@ -26,7 +26,7 @@ export class MessageList extends React.Component {
       var message = this.state.messages[index];
       items.push(<li key={index}><span><strong>{message.user}:</strong></span> {message.msg[this.props.language]}</li>)
     }
-    return (<ul>{items.reverse()}</ul>)
+    return (<ul>{items}</ul>)
   }
 }
 
