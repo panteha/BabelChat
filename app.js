@@ -62,7 +62,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
-app.get('/', function(req, res){
+app.get('/chat', function(req, res){
   if (req.user !== undefined) {
     console.log("request from " + req.user.local.email);
   }
