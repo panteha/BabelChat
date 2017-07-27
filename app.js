@@ -13,7 +13,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var translate = require('./translate');
+var translate = require('./src/translate');
 require('./config/passport')(passport);
 
 app.set('view engine', 'ejs');

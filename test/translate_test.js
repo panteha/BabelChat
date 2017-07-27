@@ -16,7 +16,7 @@ describe("translation", function () {
 
       client.once("connect", function () {
           client.once("add message", function (msg) {
-              msg['fa'].should.equal("سلام");
+              msg.msg['fa'].should.equal("سلام");
 
               client.disconnect();
               done();
