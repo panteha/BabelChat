@@ -14,20 +14,18 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport);
 
-app.set('view engine', 'ejs'); // set up ejs for templating
-
-// set up middleware for express
-app.use(morgan('dev')); // log every request to the console
+app.set('view engine', 'ejs');
+app.use(morgan('dev'));
 app.use(express.static('public'));
-app.use(cookieParser()); // read cookies (needed for passport)
-app.use(bodyParser()); // get information from html forms
+app.use(cookieParser());
+app.use(bodyParser());
 var sharedSession = session({ secret: 'ilovescotchscotchyscotchscotch' });
-app.use(sharedSession); // session secret
+app.use(sharedSession);
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session());
+app.use(flash());
 
 io.use(function(socket, next) {
   morgan('dev')(socket.client.request, socket.client.request.res, next);
@@ -47,17 +45,12 @@ io.use(function(socket, next){
   passport.session()(socket.client.request, socket.client.request.res, next);
 });
 
-// routes ======================================================================
-require('./routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
-// import environmental variables from our development.env file
-
+require('./routes/routes.js')(app, passport);
 require('dotenv').config();
 const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
 
-//Connect to our Database and handle an bad connections
 mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
@@ -85,7 +78,6 @@ io.on('connection', function(socket){
     }
     console.log('message: ' + msg);
     translate.translateMessage(msg, function(err, translations) {
-      // broadcast a chat message event to all sockets
       io.emit('add message', {user: username, msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
