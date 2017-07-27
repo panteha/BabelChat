@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { SelectLanguage, MessageList, SendMessage } from '../babelchat';
+import { SelectLanguage, MessageList, SendMessage } from '../src/babelchat';
 require('../app');
 var io = require('socket.io-client');
 
