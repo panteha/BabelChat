@@ -4,7 +4,7 @@ import {BabelChat} from './babelchat';
 
 ReactDOM.render(
   (
-  <Node Authentication />
+  <BabelChat />
 
   ),
   document.querySelector("#babelchat")
