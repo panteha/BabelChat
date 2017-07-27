@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import { EmojiBox, Emoji, EmojiTextBox } from '../emoji';
+import { EmojiBox, Emoji, EmojiTextBox } from '../src/emoji';
 
 describe('<EmojiBox />', () => {
   it('selects an emoji', () => {

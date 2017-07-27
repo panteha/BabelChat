@@ -23,6 +23,7 @@ Engage team after struggling for more than 45mins
 
  * Install [Node.js](https://nodejs.org/)
  * `npm install --save express`
+ * `npm i nyc --save-dev` (Incase nyc file gets deleted from node_modules folder)
  * `npm install --save socket.io`
  * `npm install --save google-translate`
  * `npm install react react-dom --save`
@@ -32,6 +33,7 @@ Engage team after struggling for more than 45mins
 
 To set up Google Translate API for Heroku
  * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
+ * ` heroku config:set DATABASE_DEVELOPMENT=mongodb://<username>:<password>@<hostname>.mlab.com:<port>/babelchat`
 
 To run:
  * `node index.js`
@@ -50,7 +52,7 @@ then visit `http://localhost:3000/`
  * `npm install --save-dev jsdom jsdom-global`
 
 To run:
- * `./node_modules/mocha/bin/mocha`
+ * `webpack; npm start`
 
 ## mongodb
 
@@ -74,3 +76,4 @@ To run:
 [Andrew Clarke](https://github.com/Dino982)
 [Spencer Barton-Fisher](https://github.com/spencerbf)
 [Aaron Rodrigues](https://github.com/AaronRodrigues)
+[Elena Morton](https://github.com/elenamorton)

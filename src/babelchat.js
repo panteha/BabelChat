@@ -23,7 +23,8 @@ export class MessageList extends React.Component {
   render() {
     var items = [];
     for (var index in this.state.messages) {
-      items.push(<li key={index}>{this.state.messages[index][this.props.language]}</li>)
+      var message = this.state.messages[index];
+      items.push(<li key={index}><span><strong>{message.user}:</strong></span> {message.msg[this.props.language]}</li>)
     }
     return (<ul>{items}</ul>)
   }
@@ -44,7 +45,6 @@ export class SendMessage extends React.Component {
   handleSend(e) {
     e.preventDefault();
     var my_socket = this.props.socket || socket;
-    console.log('sending message...')
     my_socket.emit('chat message', this.state.message);
     this.setState({message: ''});
   }
@@ -64,10 +64,7 @@ export class SelectLanguage extends React.Component{
     this.handleListOfLanguages = this.handleListOfLanguages.bind(this);
     this.handleChange = this.handleChange.bind(this);
     var my_socket = this.props.socket || socket;
-    // when you receive 'list of languages', run this function with any
-    // additional parameters as arguments to the function.
     my_socket.on('list of languages', this.handleListOfLanguages);
-    // send 'get languages' down the connection to the server
     my_socket.emit('get languages');
   }
 
@@ -112,7 +109,7 @@ export class BabelChat extends React.Component {
         <SelectLanguage language={this.state.language}
                         onChange={this.handleLanguageChange} />
         <MessageList language={this.state.language} />
-        <SendMessage />
+        <div class="message"><SendMessage /></div>
       </div>
     )
   }

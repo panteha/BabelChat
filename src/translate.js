@@ -1,7 +1,7 @@
 var async = require('async');
 var translate = require('google-translate')(process.env.TRANSLATE_KEY);
 
-const LANGUAGES = ['en', 'fa', 'es'];
+const LANGUAGES = ['en', 'it', 'ja','la','mk', 'fa', 'ro'];
 
 var getLanguages = function(callback){
   var validLanguage = {};
