@@ -1,0 +1,23 @@
+html, body {
+  height: 100%;
+}
+
+
+.login-panel {
+  background-color: #f9fbfc;
+  width: 800px;
+  height: 550px;
+  border: 5px solid #1b626d;
+  padding: 20px;
+  margin: 100px;
+  box-shadow: 3px 3px 2px #888888;
+}
+
+
+.page {
+  height: 100%;
+  background: linear-gradient(#125a66, #ffffff);
+  margin:0px;
+  padding:0px;
+
+}
