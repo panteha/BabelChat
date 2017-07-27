@@ -8,6 +8,7 @@ var emojis = {
   'winking': '😉',
   'savoring': '😋',
   'hugging': '🤗',
+  'plus': '👍',
   'sad': '😞',
   'surprise': '😳',
   'angry': '😡',
