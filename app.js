@@ -14,58 +14,52 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var translate = require('./translate');
-var userEmail = 'namey mcnameface';
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport);
 
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
-
-app.set('view engine', 'ejs'); // set up ejs for templating
-
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.set('view engine', 'ejs');
+app.use(morgan('dev'));
+app.use(express.static('public'));
+app.use(cookieParser());
+app.use(bodyParser());
+var sharedSession = session({ secret: 'ilovescotchscotchyscotchscotch' });
+app.use(sharedSession);
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session());
+app.use(flash());
 
-// routes ======================================================================
-require('./routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+io.use(function(socket, next) {
+  morgan('dev')(socket.client.request, socket.client.request.res, next);
+});
+io.use(function(socket, next){
+  socket.client.request.originalUrl = socket.client.request.url;
+  cookieParser()(socket.client.request, socket.client.request.res, next);
+});
+io.use(function(socket, next){
+  socket.client.request.originalUrl = socket.client.request.url;
+  sharedSession(socket.client.request,   socket.client.request.res, next);
+});
+io.use(function(socket, next){
+  passport.initialize()(socket.client.request, socket.client.request.res, next);
+});
+io.use(function(socket, next){
+  passport.session()(socket.client.request, socket.client.request.res, next);
+});
 
-// import environmental variables from our development.env file
-
+require('./routes/routes.js')(app, passport);
 require('dotenv').config();
 const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
 
-//Connect to our Database and handle an bad connections
 mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
-app.use(express.static('public'))
-
-app.use(function (req, res, next) {
-  res.locals.user = req.user || null;
-  //prints out current user
-  next();
-});
-
-app.get('/', function(req, res){
-  userEmail = req.user.local.email;
+app.get('/chat', function(req, res){
+  if (req.user !== undefined) {
+    console.log("request from " + req.user.local.email);
+  }
   res.sendFile(__dirname + '/index.html');
-//Checks if user is authenticated
-  function isAuthenticated(req,res,next){
-   if(req.user)
-      return next();
-   else
-      return res.status(401).json({
-        error: 'User not authenticated'
-      })
-
-}
 });
 
 io.on('connection', function(socket){
@@ -78,11 +72,13 @@ io.on('connection', function(socket){
   })
 
   socket.on('chat message', function(msg){
+    var username = "guest";
+    if (socket.request.user !== undefined) {
+      username = socket.request.user.local.email;
+    }
     console.log('message: ' + msg);
-    // broadcast a chat message event to all sockets
     translate.translateMessage(msg, function(err, translations) {
-      // io.emit('add message', translations);
-      io.emit('add message', {user: userEmail, msg: translations});
+      io.emit('add message', {user: username, msg: translations});
       var message = new Message({content : msg});
       message.save(function(err){
         if(err) throw err;
