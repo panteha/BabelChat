@@ -1,5 +1,5 @@
 ## Design
-![Architecture of BabelChat](public/images/Babel-Chat-diagram.pdf "Architecture of BabelChat")
+![Architecture of BabelChat](public/images/Babel-Chat-diagram.png "Architecture of BabelChat")
 
 ## Aims & Objectives
 - Use Agile and XP values
