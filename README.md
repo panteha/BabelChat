@@ -1,9 +1,11 @@
+## Design
+![Architecture of BabelChat](public/images/Babel-Chat-diagram.pdf "Architecture of BabelChat")
+
 ## Aims & Objectives
 - Use Agile and XP values
 - Have fun as a team
 - Use full stack JS
 - Strong team communication via Waffle and Slack
-
 
 
 ## How Team works
