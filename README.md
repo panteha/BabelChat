@@ -1,81 +1,72 @@
-## Design
+# BabelChat
+
+Instant multi-lingual messaging.
+It allows people to talk to each other in a variety of languages, each user
+experiencing the same conversation in their own language.
+![Chatting](public/images/chat.png "Chat page")
+BabelChat is built upon:
+ * [Google Translate API for Node.js](https://github.com/Localize/node-google-translate)
+ * [Node.js](https://nodejs.org/)
+ * [Express](http://expressjs.com/)
+ * [React](https://facebook.github.io/react/)
+ * [Passport](http://passportjs.org/)
+ * [MongoDB](https://www.mongodb.com/)
+ * [webpack](https://webpack.js.org/)
+
+## Architecture
 ![Architecture of BabelChat](public/images/Babel-Chat-diagram.png "Architecture of BabelChat")
-
-## Aims & Objectives
-- Use Agile and XP values
-- Have fun as a team
-- Use full stack JS
-- Strong team communication via Waffle and Slack
-
-
-## How Team works
-```
-9:30am starts / stand-ups
-Structure each day based on stand-up
-12pm to 1pm lunch
-End of day retros
-Reassess MPV regularly
-Regular commits
-Review code before merging
-Outline objectives before meetings  
-Engage team after struggling for more than 45mins
-```
 
 ## Installation Instructions
 
- * Install [Node.js](https://nodejs.org/)
- * `npm install --save express`
- * `npm i nyc --save-dev` (Incase nyc file gets deleted from node_modules folder)
- * `npm install --save socket.io`
- * `npm install --save google-translate`
- * `npm install react react-dom --save`
- * `npm install -g webpack --save`
- * `npm install babel-core babel-loader babel-preset-es2015 babel-preset-react --save`
- * `npm install --save async`
+ * Install [Node.js](https://nodejs.org/) and npm.
+ * Install [MongoDB](https://www.mongodb.com/).
+ * Retrieve the repository and install dependencies.
+```bash
+$ git clone git@github.com:panteha/BabelChat.git
+$ cd BabelChat
+$ npm install
+```
+ * Obtain a [Google Translation API](https://cloud.google.com/translate/) key.
+ * Set up the environment:
+```bash
+$ export PATH=$PWD/node_modules/.bin:$PATH
+$ export TRANSLATE_KEY=<GOOGLE TRANSLATE API KEY>
+$ export DATABASE_DEVELOPMENT=mongodb://<username>:<password>@<hostname>:<port>/babelchat
+$ export DATABASE_TEST=mongodb://<username>:<password>@<hostname>:<port>/babelchat-test
+ ```
+ * Build React frontend
+```bash
+$ webpack
+```
 
-To set up Google Translate API for Heroku
- * `heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY`
- * ` heroku config:set DATABASE_DEVELOPMENT=mongodb://<username>:<password>@<hostname>.mlab.com:<port>/babelchat`
-
-To run:
- * `node index.js`
-
+## Running the app locally
+![BabelChat](public/images/sign-in.png "Sign in page")
+```bash
+$ npm start
+```
 then visit `http://localhost:3000/`
 
-##  Testing
+## Running tests
 
- * Install Mocha, Chai:
- * `npm install --save-dev mocha`
- * `npm install --save-dev chai`
- * `npm install --save-dev enzyme`
- * `npm install --save-dev sinon`
- * `npm install --save-dev sinon-mongoose`
- * `npm install --save-dev react-test-renderer`
- * `npm install --save-dev jsdom jsdom-global`
+```bash
+$ npm test
+```
 
-To run:
- * `webpack; npm start`
+## Heroku set up
+To run on Heroku, the app requires a MongoDB to be hosted somewhere else.
+We have used [mlab](https://www.mlab.com/) previously.
 
-## mongodb
+To set up the Google Translate API and MongoDB for Heroku
+```bash
+$ heroku config:set TRANSLATE_KEY=$TRANSLATE_KEY
+$ heroku config:set DATABASE_DEVELOPMENT=mongodb://<username>:<password>@<hostname>.mlab.com:<port>/babelchat
+```
 
-  * Have 2 terminals open
-    * 1. running mongod (or sudo mongod)
-    * 2. mongo
-      * a. Add new database 'use babelchat_test'
-      * b. this will only show when a record is added
+## Contributors
 
-  mongod MUST BE RUNNING AT ALL TIMES TO SAVE database
-
-  * to view database information
-    * show dbs (this shows all current databases)
-    * use database name (this command opens the database)
-    * show collections (lists models)
-    * db.messages.find().pretty() (lists all records within messages)
-
-## Team Members
-[Panteha Ahmadi](https://github.com/panteha)
-[Ian Simpson](https://github.com/Simo72)
-[Andrew Clarke](https://github.com/Dino982)
-[Spencer Barton-Fisher](https://github.com/spencerbf)
-[Aaron Rodrigues](https://github.com/AaronRodrigues)
-[Elena Morton](https://github.com/elenamorton)
+ * [Panteha Ahmadi](https://github.com/panteha)
+ * [Ian Simpson](https://github.com/Simo72)
+ * [Andrew Clarke](https://github.com/Dino982)
+ * [Spencer Barton-Fisher](https://github.com/spencerbf)
+ * [Aaron Rodrigues](https://github.com/AaronRodrigues)
+ * [Elena Morton](https://github.com/elenamorton)

@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(bodyParser());
-var sharedSession = session({ secret: 'ilovescotchscotchyscotchscotch' });
+var sharedSession = session({ secret: '39012875dada5e634c7c4ef201a76e8c0eb2eb96' });
 app.use(sharedSession);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -59,7 +59,7 @@ app.get('/chat', function(req, res){
   if (req.user !== undefined) {
     console.log("request from " + req.user.local.email);
   }
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 io.on('connection', function(socket){
